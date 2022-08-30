@@ -33,7 +33,7 @@ app.use(
     name: 'session',
     secret: process.env.SECRET_HASH,
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_SESSIONS
     }),
