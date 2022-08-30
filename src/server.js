@@ -31,8 +31,8 @@ app.use(
   session({
     name: 'session',
     secret: process.env.SECRET_HASH,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: new FileStore({
       logFn: function () {},
       path: '/tmp'
