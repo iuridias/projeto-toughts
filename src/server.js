@@ -3,8 +3,8 @@ const path = require("path");
 
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
-const FSStore = require('connect-fs2')(session);
+// const FileStore = require('session-file-store')(session);
+const MongoStore = require("connect-mongo");
 const flash = require('express-flash');
 require('dotenv').config();
 
@@ -13,7 +13,6 @@ const ToughtController = require('./controllers/ToughtController');
 //Import das rotas
 const toughtsRoutes = require('./routes/toughtsRoutes');
 const authRoutes = require('./routes/authRoutes');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -29,15 +28,14 @@ app.use(
 )
 
 //session middleware
-app.use(cookieParser());
 app.use(
   session({
     name: 'session',
     secret: process.env.SECRET_HASH,
     resave: true,
     saveUninitialized: true,
-    store: new FSStore({
-      dir: '/tmp/sessions'
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_SESSIONS
     }),
     cookie: {
       secure: false,
