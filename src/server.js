@@ -36,7 +36,9 @@ app.use(
     secret: process.env.SECRET_HASH,
     resave: true,
     saveUninitialized: true,
-    store: new FSStore,
+    store: new FSStore({
+      dir: '/tmp/sessions'
+    }),
     cookie: {
       secure: false,
       maxAge: 360000,
