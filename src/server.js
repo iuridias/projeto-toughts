@@ -12,6 +12,7 @@ const ToughtController = require('./controllers/ToughtController');
 //Import das rotas
 const toughtsRoutes = require('./routes/toughtsRoutes');
 const authRoutes = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(
 )
 
 //session middleware
+app.use(cookieParser());
 app.use(
   session({
     name: 'session',
