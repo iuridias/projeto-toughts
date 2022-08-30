@@ -33,10 +33,7 @@ app.use(
     secret: process.env.SECRET_HASH,
     resave: false,
     saveUninitialized: false,
-    store: new FileStore({
-      logFn: function () {},
-      path: '/tmp/sessions'
-    }),
+    store: new FileStore,
     cookie: {
       secure: false,
       maxAge: 360000,
